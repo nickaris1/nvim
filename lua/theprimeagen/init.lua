@@ -1,6 +1,7 @@
 require("theprimeagen.set")
 require("theprimeagen.remap")
-
+require("theprimeagen.quickfix")
+require("theprimeagen.debug")
 require("theprimeagen.lazy_init")
 
 -- DO.not
