@@ -54,3 +54,22 @@ vim.api.nvim_create_autocmd('FileType', {
     end, { buffer = true })
   end
 })
+
+
+function FilterUniqueFiles()
+  local qflist = vim.fn.getqflist()
+  local unique_files = {}
+  local new_qflist = {}
+
+  for _, entry in ipairs(qflist) do
+    if not unique_files[entry.bufnr] then
+      unique_files[entry.bufnr] = true
+      table.insert(new_qflist, entry)
+    end
+  end
+
+  vim.fn.setqflist(new_qflist)
+  print("Quickfix list updated with unique files only.")
+end
+
+
