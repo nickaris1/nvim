@@ -1,4 +1,4 @@
-function printObj(obj, hierarchyLevel) 
+function printObj(obj, hierarchyLevel)
   if (hierarchyLevel == nil) then
     hierarchyLevel = 0
   elseif (hierarchyLevel == 4) then
@@ -19,7 +19,7 @@ function printObj(obj, hierarchyLevel)
         printObj(v, hierarchyLevel+1)
       else
         print(v)
-      end           
+      end
     end
   else
     print(obj)
