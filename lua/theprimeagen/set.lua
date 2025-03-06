@@ -1,6 +1,7 @@
 vim.opt.guicursor = ""
 
 vim.opt.fileformat = "unix"
+vim.opt.ff = "unix"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
