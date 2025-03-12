@@ -41,3 +41,8 @@ vim.opt.termguicolors = true
 
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 999
+
+
+
+vim.opt.laststatus = 3
+
