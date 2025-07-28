@@ -16,12 +16,12 @@ return {
     },
   },
   behaviour = {
-    auto_suggestions = false, -- Experimental stage
+    auto_suggestions = true, -- Experimental stage
     enable_cursor_planning_mode = true
   },
   mappings = {
     suggestion = {
-      accept = "<F2>",
+      accept = "<A-l>",
     }
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`

@@ -9,9 +9,6 @@ return {
 
     null_ls.setup({
       sources = {
-        null_ls.builtins.diagnostics.eslint_d.with({
-          diagnostics_format = '[eslint] #{m}\n(#{c})'
-        }),
         null_ls.builtins.diagnostics.fish,
         null_ls.builtins.formatting.prettier.with({
           filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "css", "scss", "json", "yaml", "markdown" }
@@ -45,7 +42,7 @@ return {
         vim.keymap.set("n", "<M-CR>", function() vim.lsp.buf.code_action() end, opts)
 
         if client.supports_method("textDocument/formatting") then
-          vim.keymap.set("n", "<Leader>f", function()
+          vim.keymap.set("n", "<Leader>ff", function()
             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
           end, { buffer = bufnr, desc = "[lsp] format" })
 
@@ -64,7 +61,7 @@ return {
         end
 
         if client.supports_method("textDocument/rangeFormatting") then
-          vim.keymap.set("x", "<Leader>f", function()
+          vim.keymap.set("x", "<Leader>ff", function()
             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
           end, { buffer = bufnr, desc = "[lsp] format" })
         end
