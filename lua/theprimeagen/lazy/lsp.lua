@@ -1,8 +1,8 @@
 return {
   "neovim/nvim-lspconfig",
   dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
+    { "williamboman/mason.nvim",           version = "^1.0.0" },
+    { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
@@ -32,7 +32,7 @@ return {
         "tailwindcss",
       },
       handlers = {
-        function(server_name)         -- default handler (optional)
+        function(server_name) -- default handler (optional)
           require("lspconfig")[server_name].setup {
             capabilities = capabilities
           }
@@ -51,6 +51,22 @@ return {
             }
           }
         end,
+
+
+        ["tailwindcss"] = function()
+          local lspconfig = require("lspconfig")
+
+          lspconfig.tailwindcss.setup({
+            capabilities = capabilities,
+            settings = {
+              tailwindCSS = {
+                experimental = {
+                  configFile = '../../packages/reactlib/global.css'
+                }
+              }
+            }
+          })
+        end
       }
     })
 
@@ -59,7 +75,7 @@ return {
     cmp.setup({
       snippet = {
         expand = function(args)
-          require('luasnip').lsp_expand(args.body)           -- For `luasnip` users.
+          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
         end,
       },
       mapping = cmp.mapping.preset.insert({
@@ -71,7 +87,7 @@ return {
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip' },         -- For luasnip users.
+        { name = 'luasnip' }, -- For luasnip users.
       }, {
         { name = 'buffer' },
       })

@@ -1,22 +1,23 @@
 return {
-  "jose-elias-alvarez/null-ls.nvim",
+  "nvimtools/none-ls.nvim",
+  dependencies = {
+    "nvimtools/none-ls-extras.nvim",
+  },
   config = function()
-    local null_ls = require("null-ls");
+    local none_ls = require("null-ls");
 
     local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
     local event = "BufWritePre" -- or "BufWritePost"
     local async = event == "BufWritePost"
 
-    null_ls.setup({
+    none_ls.setup({
       sources = {
-        null_ls.builtins.diagnostics.eslint_d.with({
+        require("none-ls.diagnostics.eslint_d").with({
           diagnostics_format = '[eslint] #{m}\n(#{c})'
         }),
-        null_ls.builtins.diagnostics.fish,
-        null_ls.builtins.formatting.prettier.with({
+        none_ls.builtins.formatting.prettier.with({
           filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "css", "scss", "json", "yaml", "markdown" }
         }),
-        null_ls.builtins.diagnostics.codespell,
       },
       on_attach = function(client, bufnr)
         local opts = { buffer = bufnr, remap = false }
@@ -45,7 +46,7 @@ return {
         vim.keymap.set("n", "<M-CR>", function() vim.lsp.buf.code_action() end, opts)
 
         if client.supports_method("textDocument/formatting") then
-          vim.keymap.set("n", "<Leader>f", function()
+          vim.keymap.set("n", "<Leader>ff", function()
             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
           end, { buffer = bufnr, desc = "[lsp] format" })
 
@@ -64,7 +65,7 @@ return {
         end
 
         if client.supports_method("textDocument/rangeFormatting") then
-          vim.keymap.set("x", "<Leader>f", function()
+          vim.keymap.set("x", "<Leader>ff", function()
             vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
           end, { buffer = bufnr, desc = "[lsp] format" })
         end

@@ -4,14 +4,15 @@ return {
   version = false, -- Set this to "*" to always pull the latest release version, or set it to fas
   opts = {
     provider = "openai",
-    openai = {
-      endpoint = "https://api.openai.com/v1",
-      model = "gpt-4o-mini", -- your desired model (or use gpt-4o, etc.)
-      timeout = 30000,       -- timeout in milliseconds
-      temperature = 0,       -- adjust if needed
-      max_tokens = 4096,
-      -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
-    },
+    providers = {
+      openai = {
+        endpoint = "https://api.openai.com/v1",
+        model = "gpt-4o-mini", -- your desired model (or use gpt-4o, etc.)
+        timeout = 30000,       -- timeout in milliseconds
+        max_tokens = 4096,
+        -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
+      },
+    }
   },
   behaviour = {
     auto_suggestions = true,
