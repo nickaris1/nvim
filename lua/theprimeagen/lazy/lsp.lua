@@ -56,12 +56,17 @@ return {
         ["tailwindcss"] = function()
           local lspconfig = require("lspconfig")
 
+          local configUtils = require("theprimeagen.config");
+          local rootPath = configUtils.getRootPath();
+          local config = configUtils.getLocalConfig();
+          local tailwindPath = rootPath .. '/' .. (config.TAILWIND_CSS_PATH or '');
+
           lspconfig.tailwindcss.setup({
             capabilities = capabilities,
             settings = {
               tailwindCSS = {
                 experimental = {
-                  configFile = '../../packages/reactlib/global.css'
+                  configFile = tailwindPath,
                 }
               }
             }
