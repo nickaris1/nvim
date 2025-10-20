@@ -1,5 +1,8 @@
 return {
   "nvimtools/none-ls.nvim",
+  dependencies = {
+    "nvimtools/none-ls-extras.nvim",
+  },
   config = function()
     local null_ls = require("null-ls");
 
@@ -14,6 +17,7 @@ return {
           filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "css", "scss", "json", "yaml", "markdown" }
         }),
         null_ls.builtins.diagnostics.codespell,
+        require("none-ls.diagnostics.eslint_d"),
       },
       on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then

@@ -8,8 +8,6 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/nvim-cmp",
-    "L3MON4D3/LuaSnip",
-    "saadparwaiz1/cmp_luasnip",
     "j-hui/fidget.nvim",
   },
 
@@ -33,15 +31,14 @@ return {
       },
       handlers = {
         function(server_name) -- default handler (optional)
-          require("lspconfig")[server_name].setup {
-            capabilities = capabilities
-          }
+          vim.lsp.config(server_name, { capabilities = capabilities })
+          vim.lsp.enable(server_name)
         end,
 
         ["lua_ls"] = function()
-          local lspconfig = require("lspconfig")
-          lspconfig.lua_ls.setup {
+          vim.lsp.config("lua_ls", {
             capabilities = capabilities,
+
             settings = {
               Lua = {
                 diagnostics = {
@@ -49,14 +46,12 @@ return {
                 }
               }
             }
-          }
+          })
+          vim.lsp.enable("lua_ls")
         end,
 
         ["tailwindcss"] = function()
-          local lspconfig = require("lspconfig")
-          print("Setting up tailwindcss")
-
-          lspconfig.tailwindcss.setup {
+          vim.lsp.config("tailwindcss", {
             capabilities = capabilities,
             settings = {
               tailwindCSS = {
@@ -65,7 +60,8 @@ return {
                 }
               }
             }
-          }
+          })
+          vim.lsp.enable("tailwindcss")
         end
       }
     })
@@ -87,7 +83,6 @@ return {
       }),
       sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'luasnip' }, -- For luasnip users.
       }, {
         { name = 'buffer' },
       })
