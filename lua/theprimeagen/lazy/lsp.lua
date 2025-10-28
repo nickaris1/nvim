@@ -22,17 +22,25 @@ return {
 
     require("fidget").setup({})
     require("mason").setup()
+
     require("mason-lspconfig").setup({
       ensure_installed = {
         "lua_ls",
         "rust_analyzer",
-        "ts_ls",
         "tailwindcss",
+        "ts_ls"
       },
       handlers = {
         function(server_name) -- default handler (optional)
           vim.lsp.config(server_name, { capabilities = capabilities })
           vim.lsp.enable(server_name)
+        end,
+
+        ["ts_ls"] = function()
+          vim.lsp.config("ts_ls", {
+            capabilities = capabilities,
+          })
+          -- vim.lsp.enable("ts_ls")
         end,
 
         ["lua_ls"] = function()
@@ -94,10 +102,14 @@ return {
         focusable = false,
         style = "minimal",
         border = "rounded",
-        source = "always",
+        source = "if_many",
         header = "",
         prefix = "",
       },
     })
+
+    local tsgoConfig = require('theprimeagen.lsp.tsgo')
+    vim.lsp.config('tsgo', tsgoConfig)
+    vim.lsp.enable('tsgo')
   end
 }

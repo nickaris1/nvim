@@ -8,6 +8,5 @@ return {
     { "<C-k>",         "<Cmd>MultipleCursorsAddUp<CR>",          mode = { "n", "x" },    desc = "Add a cursor then move up" },
     { "<C-Up>",        "<Cmd>MultipleCursorsAddUp<CR>",          mode = { "n", "i", "x" }, desc = "Add a cursor then move up" },
     { "<C-LeftMouse>", "<Cmd>MultipleCursorsMouseAddDelete<CR>", mode = { "n", "i" },    desc = "Add or remove a cursor" },
-    { "<Leader>a",     "<Cmd>MultipleCursorsAddMatches<CR>",     mode = { "n", "x" },    desc = "Add cursors to the word under the cursor" },
   },
 }

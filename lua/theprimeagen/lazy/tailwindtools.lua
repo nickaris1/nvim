@@ -1,4 +1,3 @@
---[[
 return {
   "luckasRanarison/tailwind-tools.nvim",
   name = "tailwind-tools",
@@ -10,4 +9,3 @@ return {
   },
   opts = {} -- your configuration
 }
---]]
