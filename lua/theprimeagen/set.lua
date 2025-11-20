@@ -1,4 +1,4 @@
-vim.opt.guicursor = ""
+vim.opt.guicursor = "n-v-c:block"
 
 vim.opt.fileformat = "unix"
 

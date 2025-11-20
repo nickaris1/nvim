@@ -1,115 +1,113 @@
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-path",
-    "hrsh7th/cmp-cmdline",
-    "hrsh7th/nvim-cmp",
-    "j-hui/fidget.nvim",
-  },
+	"neovim/nvim-lspconfig",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"williamboman/mason-lspconfig.nvim",
+		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/cmp-buffer",
+		"hrsh7th/cmp-path",
+		"hrsh7th/cmp-cmdline",
+		"hrsh7th/nvim-cmp",
+		"j-hui/fidget.nvim",
+	},
 
-  config = function()
-    local cmp = require('cmp')
-    local cmp_lsp = require("cmp_nvim_lsp")
-    local capabilities = vim.tbl_deep_extend(
-      "force",
-      {},
-      vim.lsp.protocol.make_client_capabilities(),
-      cmp_lsp.default_capabilities())
+	config = function()
+		local cmp = require("cmp")
+		local cmp_lsp = require("cmp_nvim_lsp")
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			{},
+			vim.lsp.protocol.make_client_capabilities(),
+			cmp_lsp.default_capabilities()
+		)
 
-    require("fidget").setup({})
-    require("mason").setup()
+		require("fidget").setup({})
+		require("mason").setup()
 
-    require("mason-lspconfig").setup({
-      ensure_installed = {
-        "lua_ls",
-        "rust_analyzer",
-        "tailwindcss",
-        "ts_ls"
-      },
-      handlers = {
-        function(server_name) -- default handler (optional)
-          vim.lsp.config(server_name, { capabilities = capabilities })
-          vim.lsp.enable(server_name)
-        end,
+		local tailwindConfig = require("theprimeagen.lsp.tailwindcss")
 
-        ["ts_ls"] = function()
-          vim.lsp.config("ts_ls", {
-            capabilities = capabilities,
-          })
-          -- vim.lsp.enable("ts_ls")
-        end,
+		require("mason-lspconfig").setup({
+			ensure_installed = {
+				"lua_ls",
+				"rust_analyzer",
+				"tailwindcss",
+				"ts_ls",
+			},
+			handlers = {
+				function(server_name) -- default handler (optional)
+					vim.lsp.config(server_name, { capabilities = capabilities })
+					vim.lsp.enable(server_name)
+				end,
 
-        ["lua_ls"] = function()
-          vim.lsp.config("lua_ls", {
-            capabilities = capabilities,
+				["ts_ls"] = function()
+					vim.lsp.config("ts_ls", {
+						capabilities = capabilities,
+					})
+					-- vim.lsp.enable("ts_ls")
+				end,
 
-            settings = {
-              Lua = {
-                diagnostics = {
-                  globals = { "vim", "it", "describe", "before_each", "after_each" },
-                }
-              }
-            }
-          })
-          vim.lsp.enable("lua_ls")
-        end,
+				["lua_ls"] = function()
+					vim.lsp.config("lua_ls", {
+						capabilities = capabilities,
 
-        ["tailwindcss"] = function()
-          vim.lsp.config("tailwindcss", {
-            capabilities = capabilities,
-            settings = {
-              tailwindCSS = {
-                experimental = {
-                  configFile = "../../packages/reactlib/global.css",
-                }
-              }
-            }
-          })
-          vim.lsp.enable("tailwindcss")
-        end
-      }
-    })
+						settings = {
+							Lua = {
+								diagnostics = {
+									globals = { "vim", "it", "describe", "before_each", "after_each" },
+								},
+							},
+						},
+					})
+					vim.lsp.enable("lua_ls")
+				end,
 
-    local cmp_select = { behavior = cmp.SelectBehavior.Select }
+				["tailwindcss"] = function()
+					vim.notify("Config tailwindcss")
+					vim.lsp.config("tailwindcss", tailwindConfig)
+					vim.lsp.enable("tailwindcss")
+				end,
+			},
+		})
 
-    cmp.setup({
-      snippet = {
-        expand = function(args)
-          require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        end,
-      },
-      mapping = cmp.mapping.preset.insert({
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-        ['<cr>'] = cmp.mapping.confirm({ select = true }),
-        ["<C-Space>"] = cmp.mapping.complete(),
-      }),
-      sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-      }, {
-        { name = 'buffer' },
-      })
-    })
+		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
-    vim.diagnostic.config({
-      -- update_in_insert = true,
-      float = {
-        focusable = false,
-        style = "minimal",
-        border = "rounded",
-        source = "if_many",
-        header = "",
-        prefix = "",
-      },
-    })
+		cmp.setup({
+			snippet = {
+				expand = function(args)
+					require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+				end,
+			},
+			mapping = cmp.mapping.preset.insert({
+				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
+				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
+				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+				["<cr>"] = cmp.mapping.confirm({ select = true }),
+				["<C-Space>"] = cmp.mapping.complete(),
+			}),
+			sources = cmp.config.sources({
+				{ name = "nvim_lsp" },
+			}, {
+				{ name = "buffer" },
+			}),
+		})
 
-    local tsgoConfig = require('theprimeagen.lsp.tsgo')
-    vim.lsp.config('tsgo', tsgoConfig)
-    vim.lsp.enable('tsgo')
-  end
+		vim.diagnostic.config({
+			-- update_in_insert = true,
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "if_many",
+				header = "",
+				prefix = "",
+			},
+		})
+
+		local tsgoConfig = require("theprimeagen.lsp.tsgo")
+		vim.lsp.config("tsgo", tsgoConfig)
+		vim.lsp.enable("tsgo")
+
+		vim.lsp.config("tailwindcss", tailwindConfig)
+		vim.lsp.enable("tailwindcss")
+	end,
 }
