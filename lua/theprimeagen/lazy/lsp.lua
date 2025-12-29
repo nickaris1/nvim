@@ -9,6 +9,7 @@ return {
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/nvim-cmp",
 		"j-hui/fidget.nvim",
+		"saadparwaiz1/cmp_luasnip",
 	},
 
 	config = function()
@@ -86,6 +87,7 @@ return {
 			}),
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
+				{ name = "luasnip" },
 			}, {
 				{ name = "buffer" },
 			}),
