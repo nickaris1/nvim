@@ -103,10 +103,6 @@ return {
 			},
 		})
 
-		local tsgoConfig = require("theprimeagen.lsp.tsgo")
-		vim.lsp.config("tsgo", tsgoConfig)
-		vim.lsp.enable("tsgo")
-
 		vim.lsp.config("tailwindcss", tailwindConfig)
 		vim.lsp.enable("tailwindcss")
 	end,

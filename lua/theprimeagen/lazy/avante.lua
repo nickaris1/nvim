@@ -6,6 +6,14 @@ return {
     -- add any opts here
     -- for example
     provider = "copilot",
+    auto_suggestions_provider = 'copilot',
+    behaviour = {
+      auto_suggestions = false, -- Experimental stage
+    },
+    suggestion = {
+      debounce = 100,
+      throttle = 100,
+    } ,
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
