@@ -50,3 +50,29 @@ export default new {name2}({{
   ),
 })
 
+ls.add_snippets("typescript", {
+  s(
+    "controller_validating",
+    fmt([[
+import {{
+  ControllerAuth,
+  ValidatingController,
+}} from '@repo/contracts/makeController';
+import {contract} from '@repo/contracts/{path}';
+
+export default new ValidatingController({{
+  ...{contract2},
+  handler: async (req, res, {{body}}) => {{
+    res.status(204).send();
+  }},
+  requiresAuth: ControllerAuth.REQUIRED,
+}});
+]],
+      {
+        contract = i(1, "PatchUser"),
+        contract2 = rep(1),
+        path = i(2, "patchUser"),
+      }
+    )
+  ),
+})
