@@ -9,11 +9,11 @@ ls.add_snippets("typescript", {
     "Service",
     fmt([[
 import {{ContractBody}} from '@repo/contracts/makeController';
-import {{sendAxios}} from '@repo/reactlib/services/contractSend';
+import {{contractRequest}} from '@repo/reactlib/services/contractRequest';
 import {{ {contract}  }} from '@repo/contracts/{path}';
 
 export async function {path2}({input}: ContractBody<typeof {contract2}>) {{
-  return sendAxios({contract3}, {{body: {input2}}}).catch(console.error);
+  return contractRequest({contract3}, {{body: {input2}}}).catch(console.error);
 }}
 ]],
       {
