@@ -58,7 +58,7 @@ import {{
   ControllerAuth,
   ValidatingController,
 }} from '@repo/contracts/makeController';
-import {contract} from '@repo/contracts/{path}';
+import {{ {contract} }} from '@repo/contracts/{path}';
 
 export default new ValidatingController({{
   ...{contract2},

@@ -1,7 +1,6 @@
 return {
   'pwntester/octo.nvim',
   event = "VeryLazy",
-  build = "make",
   dependencies = {
     'nvim-lua/plenary.nvim',
     'nvim-telescope/telescope.nvim',

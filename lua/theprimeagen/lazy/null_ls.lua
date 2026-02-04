@@ -25,6 +25,7 @@ return {
 						"yaml",
 						"markdown",
 					},
+          extra_args = { "--plugin", "prettier-plugin-tailwindcss" },
 				}),
 				null_ls.builtins.diagnostics.codespell,
 				require("none-ls.diagnostics.eslint_d"),
