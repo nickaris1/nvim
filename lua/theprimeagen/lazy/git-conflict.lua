@@ -1,0 +1,14 @@
+return {
+	"akinsho/git-conflict.nvim",
+	config = function()
+		require("git-conflict").setup({
+			default_mappings = true,
+			default_commands = true,
+			disable_diagnostics = true,
+			highlights = {
+				incoming = "DiffText",
+				current = "DiffAdd",
+			},
+		})
+	end,
+}

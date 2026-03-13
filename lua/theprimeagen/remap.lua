@@ -71,7 +71,7 @@ vim.keymap.set("n", "<leader>lf", function()
 		target = file_path:sub(#cwd + 2)
 	end
 
-	local result = vim.system({ "yarn", "eslint", "--fix", target }, { cwd = cwd, text = true }):wait()
+	local result = vim.system({ "eslint_d", "--fix", target }, { cwd = cwd, text = true }):wait()
 	if result.code == 0 then
 		vim.notify("eslint --fix completed", vim.log.levels.INFO)
     vim.cmd("edit") -- Reload the current buffer to reflect changes
