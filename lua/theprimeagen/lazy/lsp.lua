@@ -47,6 +47,13 @@ return {
 					-- vim.lsp.enable("ts_ls")
 				end,
 
+				["tsgo"] = function()
+					vim.lsp.config("tsgo", {
+						capabilities = capabilities,
+					})
+					-- vim.lsp.enable("tsgo")
+				end,
+
 				["lua_ls"] = function()
 					vim.lsp.config("lua_ls", {
 						capabilities = capabilities,

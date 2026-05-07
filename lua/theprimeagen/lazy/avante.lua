@@ -5,18 +5,20 @@ return {
 	opts = {
 		-- add any opts here
 		-- for example
-		provider = "copilot",
-		auto_suggestions_provider = "copilot",
-		behaviour = {
-			auto_suggestions = false, -- Experimental stage
-		},
+		provider = "lmstudio",
 		suggestion = {
-			debounce = 100,
-			throttle = 100,
+			debounce = 1000,
+			throttle = 200,
 		},
 		providers = {
 			copilot = {
 				model = "gpt-5-mini",
+			},
+			lmstudio = {
+        __inherited_from = "openai",
+				model = "qwen/qwen3.5-9b",
+				api_key_name = "",
+				endpoint = "http://localhost:1234/v1",
 			},
 		},
 	},
