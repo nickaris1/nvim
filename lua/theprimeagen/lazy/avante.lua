@@ -15,7 +15,7 @@ return {
 				model = "gpt-5-mini",
 			},
 			lmstudio = {
-        __inherited_from = "openai",
+				__inherited_from = "openai",
 				model = "qwen/qwen3.5-9b",
 				api_key_name = "",
 				endpoint = "http://localhost:1234/v1",
@@ -25,7 +25,6 @@ return {
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make",
 	dependencies = {
-		"zbirenbaum/copilot.lua",
 		"nvim-treesitter/nvim-treesitter",
 		"stevearc/dressing.nvim",
 		"nvim-lua/plenary.nvim",
@@ -40,6 +39,7 @@ return {
 			"MeanderingProgrammer/render-markdown.nvim",
 			opts = {
 				file_types = { "markdown", "Avante" },
+				latex = { enabled = false },
 			},
 			ft = { "markdown", "Avante" },
 		},

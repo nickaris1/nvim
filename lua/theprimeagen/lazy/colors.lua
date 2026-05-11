@@ -29,7 +29,7 @@ return {
         },
         on_colors = function(colors)
           colors.error = colors.red;
-          colors.fg_function = colors.orange;
+          ---@class colors.fg_function = colors.orange;
         end,
         on_highlights = function(hl, c)
           hl["@Function"] = { fg = "#ff9e00" }      -- Replace '#ff9e64' with your desired color
