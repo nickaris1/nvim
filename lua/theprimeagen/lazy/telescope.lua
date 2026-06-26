@@ -25,7 +25,6 @@ return {
 				},
 			},
 			buffers = {
-				sort_lastused = true,
 				mappings = {
 					n = {
 						["dd"] = "delete_buffer",
