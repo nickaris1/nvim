@@ -10,6 +10,12 @@ return {
 		local event = "BufWritePre" -- or "BufWritePost"
 		local async = event == "BufWritePost"
 
+		vim.g.codespell_enabled = true
+
+    vim.api.nvim_create_user_command("CodespellToggle", function()
+      null_ls.toggle("codespell")
+    end, {})
+
 		null_ls.setup({
 			sources = {
 				null_ls.builtins.diagnostics.fish,
@@ -25,7 +31,7 @@ return {
 						"yaml",
 						"markdown",
 					},
-          extra_args = { "--plugin", "prettier-plugin-tailwindcss" },
+					extra_args = { "--plugin", "prettier-plugin-tailwindcss" },
 				}),
 				null_ls.builtins.diagnostics.codespell,
 				require("none-ls.diagnostics.eslint_d"),

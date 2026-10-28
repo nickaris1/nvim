@@ -4,7 +4,8 @@ return {
 	-- name = "tsc.nvim",
 	config = function()
 		require("tsc").setup({
-      -- bin_name = "tsgo"
-    })
+			bin_name = "bun",
+			flags = { "check --no-script --no-pretty" },
+		})
 	end,
 }
